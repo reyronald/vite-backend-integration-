@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '../public/vite.svg'
 import './App.css'
+import { Link } from 'react-router-dom'
+import { Router } from './Router'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -42,6 +44,8 @@ function App() {
       <pre style={{ textAlign: 'left' }}>{JSON.stringify(data, null, 2)}</pre>
 
       {error && <pre style={{ color: 'red' }}>{JSON.stringify(error, null, 2)}</pre>}
+
+      <Router />
     </>
   )
 }

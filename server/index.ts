@@ -9,9 +9,7 @@ app.get('/api/hello', (_req, res) => {
 })
 
 ViteExpress.config({
-  //   inlineViteConfig: {
-  //     root: 'server',
-  //   },
+  viteConfigFile: 'client/vite.config.ts',
   transformer: (html: string, _req: Request) => {
     return html.replace(
       '<!-- placeholder -->',
