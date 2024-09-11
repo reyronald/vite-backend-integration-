@@ -1,16 +1,25 @@
 import * as express from 'express'
+import * as ViteExpress from 'vite-express'
 
 const app = express()
 const port = 4000
-
-app.get('/', (req, res) => {
-  res.send('Hello, world!')
-})
 
 app.get('/api/hello', (_req, res) => {
   res.json({ hello: 'world' })
 })
 
-app.listen(port, () => {
+ViteExpress.config({
+  //   inlineViteConfig: {
+  //     root: 'server',
+  //   },
+  transformer: (html: string, _req: Request) => {
+    return html.replace(
+      '<!-- placeholder -->',
+      `<meta name="custom" content="hello from the server"/>`,
+    )
+  },
+})
+
+ViteExpress.listen(app, port, () => {
   console.log(`Server is running on port http://localhost:${port}`)
 })
