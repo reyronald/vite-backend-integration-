@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import viteLogo from '../public/vite.svg'
 import './App.css'
+import { Router } from './Router'
 
 function App() {
   const [count, setCount] = useState(0)
 
   const [data, setData] = useState(null)
-  const [error, setError] = useState(null)
+  const [error, setError] = useState<null | Error>(null)
 
   useEffect(() => {
     fetch('/api/hello')
@@ -37,11 +38,20 @@ function App() {
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
       </div>
+
       <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
 
-      <pre style={{ textAlign: 'left' }}>{JSON.stringify(data, null, 2)}</pre>
+      <p>API result:</p>
 
-      {error && <pre style={{ color: 'red' }}>{JSON.stringify(error, null, 2)}</pre>}
+      {data && <pre style={{ textAlign: 'left' }}>{JSON.stringify(data, null, 2)}</pre>}
+
+      {error && (
+        <pre style={{ color: '#ff6c6c' }}>
+          {error instanceof Error ? `${error.name}: ${error.message}` : String(error)}
+        </pre>
+      )}
+
+      <Router />
     </>
   )
 }
